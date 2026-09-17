@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "od-cache-review-v1",
+  "label": "synthetic-example",
+  "networkRequests": 0,
+  "totals": {
+    "observations": 8,
+    "uniqueKeys": 4,
+    "duplicateObservations": 4,
+    "potentialHitRate": 0.5,
+    "maxMultiplicity": 3,
+    "crossTaskKeys": 1,
+    "crossTaskDuplicateObservations": 1,
+    "crossTaskPotentialHitRate": 0.125
+  },
+  "cacheable": {
+    "observations": 6,
+    "uniqueKeys": 4,
+    "duplicateObservations": 2,
+    "potentialHitRate": 0.333333,
+    "maxMultiplicity": 3,
+    "crossTaskKeys": 1,
+    "crossTaskDuplicateObservations": 1,
+    "crossTaskPotentialHitRate": 0.166667,
+    "excludedReasons": {
+      "endpoint_unverified": 1,
+      "temporary": 1
+    }
+  },
+  "uidVariantGroups": {
+    "groups": 1,
+    "samples": [
+      {
+        "provider": "baidu",
+        "apiVersion": "directionlite/v1/walking",
+        "metric": "duration",
+        "coordSystem": "bd09ll",
+        "origin": [
+          121.513926,
+          31.313077
+        ],
+        "destination": [
+          121.517526,
+          31.313077
+        ],
+        "uids": [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            "poi-9"
+          ]
+        ]
+      }
+    ]
+  },
+  "byMetric": {
+    "distance": 1,
+    "duration": 7
+  }
+}

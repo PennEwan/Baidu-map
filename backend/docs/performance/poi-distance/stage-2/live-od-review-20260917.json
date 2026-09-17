@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "od-cache-review-v1",
+  "label": "live-fixed-center-20260917",
+  "networkRequests": 0,
+  "totals": {
+    "observations": 30,
+    "uniqueKeys": 10,
+    "duplicateObservations": 20,
+    "potentialHitRate": 0.666667,
+    "maxMultiplicity": 3,
+    "crossTaskKeys": 0,
+    "crossTaskDuplicateObservations": 0,
+    "crossTaskPotentialHitRate": 0.0
+  },
+  "cacheable": {
+    "observations": 30,
+    "uniqueKeys": 10,
+    "duplicateObservations": 20,
+    "potentialHitRate": 0.666667,
+    "maxMultiplicity": 3,
+    "crossTaskKeys": 0,
+    "crossTaskDuplicateObservations": 0,
+    "crossTaskPotentialHitRate": 0.0,
+    "excludedReasons": {}
+  },
+  "uidVariantGroups": {
+    "groups": 0,
+    "samples": []
+  },
+  "byMetric": {
+    "duration": 30
+  }
+}

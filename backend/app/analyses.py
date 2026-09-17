@@ -20,6 +20,7 @@ from .baidu import silence_transport_logs
 from .contracts import Data, Issue, Rules, TaskResultResponse, TaskStatusResponse, RouteEvidence, map_business_status
 from .rules import DistanceRule
 from .facilities import analyze_facilities
+from .stage_ledger import current
 
 
 class Center(BaseModel):
@@ -98,22 +99,30 @@ class RateGate:
         self.spacing_clock = spacing_clock or (time.perf_counter if clock is time.monotonic else clock)
 
     async def wait(self, deadline):
-        async with self.lock:
-            now = self.spacing_clock()
-            when = max(now, self.next_send)
-            if self.clock() + when - now >= deadline:
-                return False
-            await self.sleep(max(0, when - now))
-            # asyncio timers can wake before their requested time. Recheck the
-            # clock under the lock rather than treating sleep as a permit.
-            while self.spacing_clock() < when:
+        t0 = self.spacing_clock()
+        allowed = False
+        try:
+            async with self.lock:
+                now = self.spacing_clock()
+                when = max(now, self.next_send)
+                if self.clock() + when - now >= deadline:
+                    return False
+                await self.sleep(max(0, when - now))
+                # asyncio timers can wake before their requested time. Recheck the
+                # clock under the lock rather than treating sleep as a permit.
+                while self.spacing_clock() < when:
+                    if self.clock() >= deadline:
+                        return False
+                    await self.sleep(max(when - self.spacing_clock(), time.get_clock_info('monotonic').resolution))
                 if self.clock() >= deadline:
                     return False
-                await self.sleep(max(when - self.spacing_clock(), time.get_clock_info('monotonic').resolution))
-            if self.clock() >= deadline:
-                return False
-            self.next_send = self.spacing_clock() + self.interval
-            return True
+                self.next_send = self.spacing_clock() + self.interval
+                allowed = True
+                return True
+        finally:
+            ledger = current()
+            if ledger:
+                ledger.record("pacing", seconds=self.spacing_clock() - t0, reason=None if allowed else "deadline")
 
     def completed(self, reason):
         # Cool down all subsequent attempts, not just this destination's retry.
@@ -131,15 +140,30 @@ class LimitedProvider:
     async def query_walking_time(self, origin, destination, deadline):
         # A permit alone cannot control server arrivals after DNS/TLS/pool delays.
         # Keep the shared slot through the response and start spacing afterwards.
+        ledger = current()
+        lock_started = time.perf_counter()
         async with self.gate.attempt_lock:
+            if ledger:
+                ledger.record("slot_wait", seconds=time.perf_counter() - lock_started)
             if not await self.gate.wait(deadline):
                 return RouteObservation(destination, reason="deadline")
             reason = 'interrupted'
+            if ledger:
+                ledger.enter_inflight()
+            started = time.perf_counter()
             try:
                 result = await self.provider.query_walking_time(origin, destination, deadline)
                 reason = result.reason
+                if ledger:
+                    ledger.record_od(stage="walking", provider_identity=self.identity, origin=origin,
+                                     destination=destination, reason=result.reason,
+                                     endpoint_verified=result.endpoint_verified,
+                                     duration=result.duration, distance_m=result.distance_m)
                 return result
             finally:
+                if ledger:
+                    ledger.record("walking", seconds=time.perf_counter() - started, reason=reason)
+                    ledger.exit_inflight()
                 self.gate.completed(reason)
 
 

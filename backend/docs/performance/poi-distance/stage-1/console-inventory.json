@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "console-inventory-v1",
+  "verified": false,
+  "checkedAt": null,
+  "source": "user-provided-console-2026-09-16",
+  "note": "2026-09-17 更换新 AK：旧 walking=3 次/秒、5000 次/日 属于旧 AK，已作废，待按新 AK 重新核验。",
+  "walkingDirection": {
+    "permission": null,
+    "perSecond": null,
+    "daily": null,
+    "note": "旧 AK 核验值已因换 AK 作废；新 AK 待核验。"
+  },
+  "walkingMatrix": {
+    "permission": null,
+    "odPerSecond": null,
+    "daily": null,
+    "note": "矩阵权限与 OD 额度仍未核验；阶段三门禁仍待，不能用 walking 额度外推。"
+  },
+  "analysisQpsRecommendation": {
+    "value": null,
+    "rule": "本地 pacing 不得超过控制台每秒额度；新 AK 额度核验前不得据此设置 ANALYSIS_QPS。"
+  }
+}
