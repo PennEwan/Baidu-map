@@ -1,0 +1,967 @@
+{
+  "schemaVersion": "od-observations-v1",
+  "note": "已授权本地真实运行的坐标/耗时明细；不含 AK、URL 与请求头。",
+  "sourceFormat": "boundary-reference-v2",
+  "observations": [
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.503633,
+        31.314037
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1038.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.507061,
+        31.314315
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 763.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.505092,
+        31.31547
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1028.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.507464,
+        31.31509
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 802.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.506684,
+        31.311479
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 982.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.508802,
+        31.312863
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 875.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.506684,
+        31.311479
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 982.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.507061,
+        31.314315
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 763.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.507464,
+        31.31509
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 802.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.506822,
+        31.318196
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1199.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.508662,
+        31.310047
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1495.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511404,
+        31.309988
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 701.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.508662,
+        31.310047
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1495.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.508802,
+        31.312863
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 875.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.507912,
+        31.31527
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 787.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.508544,
+        31.317513
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 909.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.508544,
+        31.317513
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 909.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511713,
+        31.316772
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 632.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.510891,
+        31.308185
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1082.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512404,
+        31.308773
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 715.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.510891,
+        31.308185
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1082.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511404,
+        31.309988
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 701.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511713,
+        31.316772
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 632.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.50982,
+        31.319215
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1101.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512378,
+        31.306573
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1191.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512404,
+        31.308773
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 715.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.514875,
+        31.30758
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1266.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.514799,
+        31.308735
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 794.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515221,
+        31.315245
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 415.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515835,
+        31.317425
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 955.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516614,
+        31.307511
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1244.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516049,
+        31.308011
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 888.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516049,
+        31.308011
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 888.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.519965,
+        31.309363
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 954.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516691,
+        31.310032
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 725.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.519956,
+        31.30989
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 926.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516545,
+        31.315674
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 607.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.519449,
+        31.316037
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 969.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516545,
+        31.315674
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 607.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.517741,
+        31.31763
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 950.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.519956,
+        31.30989
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 926.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.519934,
+        31.31225
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 833.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.519342,
+        31.313362
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 634.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.519449,
+        31.316037
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 969.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.5207,
+        31.310572
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 923.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.520341,
+        31.311644
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 873.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.520341,
+        31.311644
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 873.0
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "metric": "duration",
+      "coord_system": "bd09ll",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.523027,
+        31.311936
+      ],
+      "origin_uid": "",
+      "destination_uid": "",
+      "task_id": "boundary-reference-v2",
+      "reason": null,
+      "endpoint_verified": null,
+      "duration_s": 1106.0
+    }
+  ]
+}

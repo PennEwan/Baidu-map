@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "qps-probe-plan-v1",
+  "note": "零请求计划；live 需 --accept-quota，遇 rate_limit/quota/permission 立即停止。",
+  "provider": "baidu/directionlite/v1/walking",
+  "origin": [
+    121.513926,
+    31.313077
+  ],
+  "levels": [
+    {
+      "qps": 1.0,
+      "plannedRequests": 1
+    },
+    {
+      "qps": 2.0,
+      "plannedRequests": 2
+    },
+    {
+      "qps": 3.0,
+      "plannedRequests": 3
+    },
+    {
+      "qps": 5.0,
+      "plannedRequests": 5
+    },
+    {
+      "qps": 8.0,
+      "plannedRequests": 8
+    },
+    {
+      "qps": 12.0,
+      "plannedRequests": 12
+    },
+    {
+      "qps": 20.0,
+      "plannedRequests": 20
+    }
+  ],
+  "estimatedRequests": 51,
+  "budget": 60,
+  "maxQps": 20.0,
+  "createdAt": "2026-09-17T11:17:45.554923+00:00"
+}

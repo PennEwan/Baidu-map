@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "matrix-pair-plan-v1",
+  "note": "冻结的成对 OD 计划；live 前不得改点。可在单个用例补 destinationUid 后重新冻结。",
+  "center": {
+    "lng": 121.513926,
+    "lat": 31.313077
+  },
+  "routeMetric": "distance",
+  "coordSystem": "bd09ll",
+  "createdAt": "2026-09-16T12:39:38.634985+00:00",
+  "cases": [
+    {
+      "id": "od-1",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.517526,
+        31.313077
+      ],
+      "destinationUid": ""
+    },
+    {
+      "id": "od-2",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.316501
+      ],
+      "destinationUid": ""
+    },
+    {
+      "id": "od-3",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.315193
+      ],
+      "destinationUid": ""
+    },
+    {
+      "id": "od-4",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.310961
+      ],
+      "destinationUid": ""
+    },
+    {
+      "id": "od-5",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.309653
+      ],
+      "destinationUid": ""
+    }
+  ],
+  "planHash": "7b1ef88aaff161e134016709eb8b47869e1cd382d0ae5c939a52608575d50c60"
+}

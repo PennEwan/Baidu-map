@@ -141,7 +141,7 @@ class PoiRuntime:
             for attempt in range(2):
                 self.check(category)
                 wait_started = time.monotonic()
-                async with request_slot(self.gate, self.token, self.deadline) as outcome:
+                async with request_slot(self.gate, self.token, self.deadline, stage='poi_search', attempt=attempt+1) as outcome:
                     self.limiter_wait_ms += (time.monotonic()-wait_started)*1000
                     self.check(category)  # Recheck after pacing, including the authorization window.
                     event = {'id': len(self.events)+1, 'category': category, 'sequenceId': sequence['sequenceId'],

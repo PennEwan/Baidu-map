@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "matrix-contract-review-v1",
+  "label": "synthetic-example",
+  "networkRequests": 0,
+  "gateEligible": false,
+  "verdict": "incompatible",
+  "tolerances": {
+    "distanceAbsM": 50,
+    "distanceRel": 0.05,
+    "durationAbsS": 30,
+    "durationRel": 0.1
+  },
+  "totals": {
+    "cases": 5,
+    "matches": 2,
+    "mismatches": 2,
+    "matrixUnknown": 1,
+    "singleUnknown": 0,
+    "routeDivergences": 1,
+    "uidBoundCases": 1,
+    "singleEndpointUnverified": 0
+  },
+  "checks": [
+    {
+      "id": "od-match",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.517526,
+        31.313077
+      ],
+      "destinationUid": "",
+      "single": {
+        "distance": 950.0,
+        "duration": 700.0,
+        "distanceUsable": true,
+        "durationUsable": true,
+        "endpointVerified": true
+      },
+      "matrix": {
+        "distance": 952.0,
+        "duration": 705.0,
+        "distanceUsable": true,
+        "durationUsable": true
+      },
+      "notes": [],
+      "deltas": {
+        "distanceM": 2.0,
+        "durationS": 5.0
+      },
+      "distanceWithin": true,
+      "durationWithin": true,
+      "routeDivergence": false,
+      "verdict": "match"
+    },
+    {
+      "id": "od-mismatch",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.510326,
+        31.313077
+      ],
+      "destinationUid": "",
+      "single": {
+        "distance": 800.0,
+        "duration": 600.0,
+        "distanceUsable": true,
+        "durationUsable": true,
+        "endpointVerified": true
+      },
+      "matrix": {
+        "distance": 1050.0,
+        "duration": 620.0,
+        "distanceUsable": true,
+        "durationUsable": true
+      },
+      "notes": [],
+      "deltas": {
+        "distanceM": 250.0,
+        "durationS": 20.0
+      },
+      "distanceWithin": false,
+      "durationWithin": true,
+      "routeDivergence": false,
+      "verdict": "mismatch"
+    },
+    {
+      "id": "od-zero-unknown",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.508126,
+        31.313077
+      ],
+      "destinationUid": "",
+      "single": {
+        "distance": 900.0,
+        "duration": 650.0,
+        "distanceUsable": true,
+        "durationUsable": true,
+        "endpointVerified": true
+      },
+      "matrix": {
+        "distance": 0.0,
+        "duration": 0.0,
+        "distanceUsable": false,
+        "durationUsable": false
+      },
+      "notes": [
+        "矩阵 0/缺失：unknown，不是覆盖。"
+      ],
+      "verdict": "matrix_unknown"
+    },
+    {
+      "id": "od-route-divergence",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.506326,
+        31.313077
+      ],
+      "destinationUid": "",
+      "single": {
+        "distance": 950.0,
+        "duration": 700.0,
+        "distanceUsable": true,
+        "durationUsable": true,
+        "endpointVerified": true
+      },
+      "matrix": {
+        "distance": 1050.0,
+        "duration": 600.0,
+        "distanceUsable": true,
+        "durationUsable": true
+      },
+      "notes": [],
+      "deltas": {
+        "distanceM": 100.0,
+        "durationS": -100.0
+      },
+      "distanceWithin": false,
+      "durationWithin": false,
+      "routeDivergence": true,
+      "verdict": "mismatch"
+    },
+    {
+      "id": "od-uid-bound",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.517526,
+        31.313077
+      ],
+      "destinationUid": "poi-9",
+      "single": {
+        "distance": 990.0,
+        "duration": 710.0,
+        "distanceUsable": true,
+        "durationUsable": true,
+        "endpointVerified": true
+      },
+      "matrix": {
+        "distance": 995.0,
+        "duration": 712.0,
+        "distanceUsable": true,
+        "durationUsable": true
+      },
+      "notes": [],
+      "deltas": {
+        "distanceM": 5.0,
+        "durationS": 2.0
+      },
+      "distanceWithin": true,
+      "durationWithin": true,
+      "routeDivergence": false,
+      "verdict": "match"
+    }
+  ],
+  "notes": [
+    "矩阵响应没有 steps/path/实际端点；任何 matrix endpointVerified 输入都会在解析阶段被拒绝。",
+    "矩阵数值为 0 或缺失一律记 unknown，不得当可达或覆盖证据。",
+    "只有 label=paired-live 的成对真实运行可以过门禁；合成/历史标签仅供链路验证。",
+    "label 不是 paired-live，本次结果不能过门禁。"
+  ]
+}

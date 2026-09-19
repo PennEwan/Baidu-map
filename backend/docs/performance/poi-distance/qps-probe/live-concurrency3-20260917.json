@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "qps-probe-v1",
+  "label": "qps-probe-live",
+  "provider": "baidu/directionlite/v1/walking",
+  "qpsIsLocalOnly": true,
+  "concurrency": 3,
+  "note": "pacing 上限探测；observedCeilingQps 是最后整档通过的值，不是控制台额度。",
+  "levels": [
+    {
+      "qps": 1.0,
+      "concurrency": 3,
+      "plannedRequests": 1,
+      "sent": 1,
+      "ok": 1,
+      "outcomes": {
+        "None": 1
+      },
+      "durationMeanSeconds": 535.0,
+      "wallSeconds": 0.269375,
+      "achievedQps": 3.712,
+      "maxInOneSecond": 1,
+      "passed": true
+    },
+    {
+      "qps": 2.0,
+      "concurrency": 3,
+      "plannedRequests": 2,
+      "sent": 2,
+      "ok": 2,
+      "outcomes": {
+        "None": 2
+      },
+      "durationMeanSeconds": 555.5,
+      "wallSeconds": 0.619291,
+      "achievedQps": 3.229,
+      "maxInOneSecond": 2,
+      "passed": true
+    },
+    {
+      "qps": 3.0,
+      "concurrency": 3,
+      "plannedRequests": 3,
+      "sent": 3,
+      "ok": 3,
+      "outcomes": {
+        "None": 3
+      },
+      "durationMeanSeconds": 642.0,
+      "wallSeconds": 0.827669,
+      "achievedQps": 3.625,
+      "maxInOneSecond": 3,
+      "passed": true
+    },
+    {
+      "qps": 5.0,
+      "concurrency": 3,
+      "plannedRequests": 5,
+      "sent": 5,
+      "ok": 5,
+      "outcomes": {
+        "None": 5
+      },
+      "durationMeanSeconds": 517.4,
+      "wallSeconds": 0.906515,
+      "achievedQps": 5.516,
+      "maxInOneSecond": 5,
+      "passed": true
+    },
+    {
+      "qps": 8.0,
+      "concurrency": 3,
+      "plannedRequests": 8,
+      "sent": 8,
+      "ok": 8,
+      "outcomes": {
+        "None": 8
+      },
+      "durationMeanSeconds": 633.625,
+      "wallSeconds": 0.980517,
+      "achievedQps": 8.159,
+      "maxInOneSecond": 8,
+      "passed": true
+    },
+    {
+      "qps": 12.0,
+      "concurrency": 3,
+      "plannedRequests": 12,
+      "sent": 12,
+      "ok": 12,
+      "outcomes": {
+        "None": 12
+      },
+      "durationMeanSeconds": 580.833333,
+      "wallSeconds": 1.084235,
+      "achievedQps": 11.068,
+      "maxInOneSecond": 11,
+      "passed": true
+    },
+    {
+      "qps": 20.0,
+      "concurrency": 3,
+      "plannedRequests": 20,
+      "sent": 20,
+      "ok": 20,
+      "outcomes": {
+        "None": 20
+      },
+      "durationMeanSeconds": 596.75,
+      "wallSeconds": 1.039429,
+      "achievedQps": 19.241,
+      "maxInOneSecond": 20,
+      "passed": true
+    }
+  ],
+  "observedCeilingQps": 20.0,
+  "stopReason": null,
+  "realNetworkRequests": 51,
+  "wallSeconds": 6.876901,
+  "finishedUtc": "2026-09-17T11:23:51.436601+00:00"
+}

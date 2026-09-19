@@ -1,0 +1,892 @@
+{
+  "schemaVersion": "stage-baseline-v2",
+  "mode": "live",
+  "realNetworkRequests": 30,
+  "inventory": {
+    "schemaVersion": "quota-inventory-v1",
+    "akConfigured": true,
+    "analysisProvider": "synthetic",
+    "analysisQps": 400.0,
+    "analysisQpsConfigured": true,
+    "analysisQpsIsLocalPacing": true,
+    "mockQpsThreeNotProduction": true,
+    "assumedMatrixFiftyOdPerSecondNotProduction": true,
+    "sharedCredentialSource": "same-backend-env-file",
+    "sameAccountIfSameEnvFile": true,
+    "independentLimiters": [
+      {
+        "name": "AnalysisManager.gate",
+        "qpsField": "ANALYSIS_QPS",
+        "process": "backend-api"
+      },
+      {
+        "name": "PoiRuntime.gate",
+        "qpsField": "CollectionConfig.runtime.qps",
+        "process": "poi_collect-cli"
+      }
+    ],
+    "sharedAccountLimiter": false,
+    "crossProcessLimiter": false,
+    "b1JoinedFacilities": false,
+    "matrixNotInProduction": true,
+    "consoleCheckRequired": true,
+    "consoleWalkingVerified": false,
+    "consoleMatrixVerified": false,
+    "analysisQpsWithinConsoleWalking": null,
+    "officialWalkingDirection": {
+      "path": "/directionlite/v1/walking",
+      "quotaUnit": "route-request"
+    },
+    "officialWalkingMatrix": {
+      "path": "/routematrix/v2/walking",
+      "maxOdProduct": 50,
+      "quotaUnit": "od-route"
+    },
+    "console": {
+      "status": "not-read-from-console",
+      "checkedAt": null,
+      "walkingPermission": null,
+      "walkingPerSecond": null,
+      "walkingDaily": null,
+      "matrixPermission": null,
+      "matrixOdPerSecond": null,
+      "matrixDaily": null
+    },
+    "liveBaseline": {
+      "center": {
+        "lng": 121.513926,
+        "lat": 31.313077
+      },
+      "maxOd": 10,
+      "minRounds": 3,
+      "requiresAcceptQuota": true
+    }
+  },
+  "provenance": {
+    "liveProvider": "baidu/directionlite/v1/walking",
+    "routeMetric": "duration",
+    "pacingQps": 3.0,
+    "pacingQpsIsLocalOnly": true,
+    "quotaSource": "local-env-not-console",
+    "consoleCheckRequired": true
+  },
+  "failureReasons": {},
+  "observations": [
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.517526,
+        31.313077
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 535,
+      "distance_m": 543,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516838,
+        31.315193
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 587,
+      "distance_m": 582,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.316501
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 710,
+      "distance_m": 761,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512814,
+        31.316501
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 537,
+      "distance_m": 524,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.315193
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 542,
+      "distance_m": 563,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.510326,
+        31.313077
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 596,
+      "distance_m": 616,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.310961
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 548,
+      "distance_m": 618,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512814,
+        31.309653
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 648,
+      "distance_m": 737,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.309653
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 713,
+      "distance_m": 814,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516838,
+        31.310961
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 651,
+      "distance_m": 693,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.517526,
+        31.313077
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 535,
+      "distance_m": 543,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516838,
+        31.315193
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 587,
+      "distance_m": 582,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.316501
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 710,
+      "distance_m": 761,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512814,
+        31.316501
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 537,
+      "distance_m": 524,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.315193
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 542,
+      "distance_m": 563,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.510326,
+        31.313077
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 596,
+      "distance_m": 616,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.310961
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 548,
+      "distance_m": 618,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512814,
+        31.309653
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 648,
+      "distance_m": 737,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.309653
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 713,
+      "distance_m": 814,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516838,
+        31.310961
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 651,
+      "distance_m": 693,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.517526,
+        31.313077
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 535,
+      "distance_m": 543,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516838,
+        31.315193
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 587,
+      "distance_m": 582,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.316501
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 710,
+      "distance_m": 761,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512814,
+        31.316501
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 537,
+      "distance_m": 524,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.315193
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 542,
+      "distance_m": 563,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.510326,
+        31.313077
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 596,
+      "distance_m": 616,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.511014,
+        31.310961
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 548,
+      "distance_m": 618,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.512814,
+        31.309653
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 648,
+      "distance_m": 737,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.515038,
+        31.309653
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 713,
+      "distance_m": 814,
+      "stage": "walking",
+      "network": true
+    },
+    {
+      "provider": "baidu",
+      "api_version": "directionlite/v1/walking",
+      "coord_system": "bd09ll",
+      "origin_uid": "",
+      "destination_uid": "",
+      "metric": "duration",
+      "origin": [
+        121.513926,
+        31.313077
+      ],
+      "destination": [
+        121.516838,
+        31.310961
+      ],
+      "task_id": "stage2-od-live-20260917",
+      "reason": null,
+      "endpoint_verified": true,
+      "duration_s": 651,
+      "distance_m": 693,
+      "stage": "walking",
+      "network": true
+    }
+  ],
+  "walking": {
+    "n": 10,
+    "qps": 3.0,
+    "rounds": 3,
+    "wallMean": 5.107595,
+    "wallMin": 4.888486,
+    "wallMax": 5.34974,
+    "wallPeakToPeak": 0.461254,
+    "relativeSpread": 0.090307,
+    "retries": [
+      0,
+      0,
+      0
+    ],
+    "failures": [
+      0,
+      0,
+      0
+    ],
+    "networkAttempts": [
+      10,
+      10,
+      10
+    ],
+    "maxInFlight": 1,
+    "dominantStages": [
+      "pacing",
+      "pacing",
+      "pacing"
+    ],
+    "summaries": [
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 10,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 5.08456,
+        "secondsByStage": {
+          "slot_wait": 3.6e-05,
+          "pacing": 3.053617,
+          "walking": 0.961752
+        },
+        "countsByStage": {
+          "slot_wait": 10,
+          "pacing": 10,
+          "walking": 10
+        },
+        "networkAttempts": 10,
+        "successes": 10,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      },
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 10,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 5.34974,
+        "secondsByStage": {
+          "slot_wait": 4e-05,
+          "pacing": 3.093123,
+          "walking": 1.000008
+        },
+        "countsByStage": {
+          "slot_wait": 10,
+          "pacing": 10,
+          "walking": 10
+        },
+        "networkAttempts": 10,
+        "successes": 10,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      },
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 10,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 4.888486,
+        "secondsByStage": {
+          "slot_wait": 3.6e-05,
+          "pacing": 3.051029,
+          "walking": 0.617871
+        },
+        "countsByStage": {
+          "slot_wait": 10,
+          "pacing": 10,
+          "walking": 10
+        },
+        "networkAttempts": 10,
+        "successes": 10,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      }
+    ]
+  },
+  "qualifiedImprovement": {
+    "status": "provisional-from-live",
+    "rule": "Any later live optimization must exceed this run's wall peak-to-peak on the same N and input; mock spread is noise only and is not a production threshold.",
+    "source": "live",
+    "wallPeakToPeakSeconds": 0.461254,
+    "wallMeanSeconds": 5.107595,
+    "relativeSpread": 0.090307
+  },
+  "center": {
+    "lng": 121.513926,
+    "lat": 31.313077
+  }
+}
