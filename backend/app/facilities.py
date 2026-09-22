@@ -4,6 +4,7 @@ import time
 
 from shapely.geometry import Point, shape
 from life_circle.coordinates import LocalProjection
+from life_circle.models import RouteObservation
 from life_circle.providers import BaiduProvider
 from life_circle.field import business_geometry
 
@@ -12,7 +13,6 @@ from .places import PlacesClient
 from .place_protocol import STOP_ERRORS
 from .request_control import RequestStopped, request_slot
 from .rules import DistanceRule, distance_within
-from .stage_ledger import current
 from .poi_evidence import poi_evidence, route_evidence
 
 GROUPS = {"shopping": ("market", "supermarket"), "medical": ("pharmacy", "hospital_pharmacy"), "education": ("school",)}
@@ -25,7 +25,6 @@ async def analyze_facilities(result, client, ak, gate, token, *, max_points=9, m
         raise ValueError("positive sampling limits required")
     start = time.monotonic()
     deadline = min(deadline or start + 300, start + 300)
-    ledger = current()
     origin = result.config.origin
     projection = LocalProjection(origin)
     # Covers the computation square plus a conservative 1.2km search margin.
@@ -33,7 +32,6 @@ async def analyze_facilities(result, client, ak, gate, token, *, max_points=9, m
     radius = math.ceil(math.sqrt(2) * extent + 1200)
     places = PlacesClient(client, ak, gate, token)
     facilities, queries = await places.search(origin, radius, deadline)
-    geo_started = time.perf_counter()
     geometry = shape(result.geometry) if result.geometry else None
     for item in facilities:
         item.in_circle = geometry.covers(Point(item.location.lng, item.location.lat)) if geometry else None
@@ -41,7 +39,6 @@ async def analyze_facilities(result, client, ak, gate, token, *, max_points=9, m
     candidates = sorted((o for o in result.sample_observations if o.duration is not None and o.duration <= 900 and o.endpoint_verified and geometry is not None and geometry.covers(Point(*o.destination))), key=lambda o: (o.duration, o.destination))
     # Spread selected points through the time range; never claim unmeasured area coverage.
     selected = candidates[:1] if max_points == 1 else candidates if len(candidates) <= max_points else [candidates[round(i*(len(candidates)-1)/(max_points-1))] for i in range(max_points)]
-    geo_seconds = time.perf_counter() - geo_started
     by_query = {q["category"]: q for q in queries}
     cache, routes, assessments = {}, {}, []
     requests = places.requests
@@ -63,18 +60,12 @@ async def analyze_facilities(result, client, ak, gate, token, *, max_points=9, m
             if stop_reason:
                 break
             try:
-                async with request_slot(gate, token, deadline, stage="walking", attempt=attempt+1) as outcome:
+                async with request_slot(gate, token, deadline) as outcome:
                     requests += 1
                     if on_progress:
                         on_progress(requests)
                     value = await provider.query_walking_time(sample.destination, (item.location.lng, item.location.lat), deadline)
                     outcome["reason"] = value.reason
-                    if ledger and value is not None:
-                        ledger.record_od(stage="walking", provider_identity=provider.identity,
-                                         origin=sample.destination,
-                                         destination=(item.location.lng, item.location.lat),
-                                         reason=value.reason, endpoint_verified=value.endpoint_verified,
-                                         duration=value.duration, distance_m=value.distance_m)
             except RequestStopped:
                 break
             if token.cancelled or time.monotonic() >= deadline:
@@ -91,16 +82,14 @@ async def analyze_facilities(result, client, ak, gate, token, *, max_points=9, m
             item.poi_evidence = mapped.poi_evidence
         return value
 
-    for sample in selected:
+    async def assess(sample):
         evidence = []
         for major, minors in GROUPS.items():
-            geo_started = time.perf_counter()
             items = sorted((f for f in facilities if f.major_category == major),
                            key=lambda f: (math.dist(projection.to_local(sample.destination), projection.to_local((f.location.lng, f.location.lat))), f.id))
             # Geographic separation only prefilters obviously remote candidates;
             # every positive decision uses the returned walking-route distance.
             nearby = [f for f in items if math.dist(projection.to_local(sample.destination), projection.to_local((f.location.lng, f.location.lat))) <= 1200]
-            geo_seconds += time.perf_counter() - geo_started
             chosen, distance = None, None
             for item in nearby[:max_routes_per_group]:
                 value = await route(sample, item)
@@ -115,6 +104,15 @@ async def analyze_facilities(result, client, ak, gate, token, *, max_points=9, m
                 if not chosen:
                     state, reason = "unknown", "cancelled_or_deadline"
             evidence.append(CoverageEvidence(category=major, status=state, facility_id=chosen, distance_m=distance, reason=reason))
+        return evidence
+
+    # Center-anchored route evidence is a real request for the analysis center; it
+    # must not depend on whether this sampler happened to measure the center itself.
+    center = next((o for o in result.sample_observations if o.destination == origin), None) or RouteObservation(origin, 0)
+    if geometry is not None:
+        await assess(center)
+    for sample in selected:
+        evidence = await assess(sample)
         assessments.append(AssessmentPoint(location={"lng": sample.destination[0], "lat": sample.destination[1]}, duration_s=sample.duration, categories=evidence))
     groups = []
     for major, minors in GROUPS.items():
@@ -130,13 +128,9 @@ async def analyze_facilities(result, client, ak, gate, token, *, max_points=9, m
         elapsed_seconds=time.monotonic()-start, search_radius_m=radius, routes=routes,
         service_blind_regions=service_blind_regions, warnings=warnings)
     counts = {major: sum(f.major_category == major and f.in_circle is True for f in facilities) for major in GROUPS}
-    report_started = time.perf_counter()
     report = f"本次检索在估算15分钟圈内记录购物{counts['shopping']}处、医疗{counts['medical']}处、教育{counts['education']}处。评估{len(assessments)}/{len(candidates)}个实测可达点。"
     for major, label in [("shopping", "购物"), ("medical", "医疗"), ("education", "教育")]:
         states = [c.status for p in assessments for c in p.categories if c.category == major]
         report += f"{label}：有设施{states.count('covered')}点、无法判断{states.count('unknown')}点。"
     report += "未评估点不计入盲区；不生成覆盖率、评分或规划等级。"
-    if ledger:
-        ledger.record("geometry", seconds=geo_seconds)
-        ledger.record("report", seconds=time.perf_counter() - report_started)
     return facilities, groups, summary, report
