@@ -1,0 +1,322 @@
+{
+  "schemaVersion": "stage-baseline-v2",
+  "mode": "mock",
+  "realNetworkRequests": 0,
+  "inventory": {
+    "schemaVersion": "quota-inventory-v1",
+    "akConfigured": false,
+    "analysisProvider": "baidu",
+    "analysisQps": null,
+    "analysisQpsConfigured": false,
+    "analysisQpsIsLocalPacing": true,
+    "mockQpsThreeNotProduction": true,
+    "assumedMatrixFiftyOdPerSecondNotProduction": true,
+    "sharedCredentialSource": "same-backend-env-file",
+    "sameAccountIfSameEnvFile": true,
+    "independentLimiters": [
+      {
+        "name": "AnalysisManager.gate",
+        "qpsField": "ANALYSIS_QPS",
+        "process": "backend-api"
+      },
+      {
+        "name": "PoiRuntime.gate",
+        "qpsField": "CollectionConfig.runtime.qps",
+        "process": "poi_collect-cli"
+      }
+    ],
+    "sharedAccountLimiter": false,
+    "crossProcessLimiter": false,
+    "b1JoinedFacilities": false,
+    "matrixNotInProduction": true,
+    "consoleCheckRequired": true,
+    "officialWalkingDirection": {
+      "path": "/directionlite/v1/walking",
+      "quotaUnit": "route-request"
+    },
+    "officialWalkingMatrix": {
+      "path": "/routematrix/v2/walking",
+      "maxOdProduct": 50,
+      "quotaUnit": "od-route"
+    },
+    "console": {
+      "status": "not-read-from-console",
+      "checkedAt": null,
+      "walkingPermission": null,
+      "walkingPerSecond": null,
+      "walkingDaily": null,
+      "matrixPermission": null,
+      "matrixOdPerSecond": null,
+      "matrixDaily": null
+    },
+    "liveBaseline": {
+      "center": {
+        "lng": 121.513926,
+        "lat": 31.313077
+      },
+      "maxOd": 10,
+      "minRounds": 3,
+      "requiresAcceptQuota": true
+    }
+  },
+  "provenance": {
+    "mode": "mock",
+    "pacingQpsIsLocalOnly": true,
+    "quotaSource": "mock-no-network"
+  },
+  "failureReasons": {},
+  "walking": {
+    "n": 10,
+    "qps": 3.0,
+    "rounds": 3,
+    "wallMean": 3.531355,
+    "wallMin": 3.525107,
+    "wallMax": 3.535627,
+    "wallPeakToPeak": 0.01052,
+    "relativeSpread": 0.002979,
+    "retries": [
+      0,
+      0,
+      0
+    ],
+    "failures": [
+      0,
+      0,
+      0
+    ],
+    "networkAttempts": [
+      10,
+      10,
+      10
+    ],
+    "maxInFlight": 1,
+    "dominantStages": [
+      "pacing",
+      "pacing",
+      "pacing"
+    ],
+    "summaries": [
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 0,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 3.533332,
+        "secondsByStage": {
+          "slot_wait": 3.6e-05,
+          "pacing": 3.051849,
+          "walking": 0.479982
+        },
+        "countsByStage": {
+          "slot_wait": 10,
+          "pacing": 10,
+          "walking": 10
+        },
+        "networkAttempts": 10,
+        "successes": 10,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      },
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 0,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 3.525107,
+        "secondsByStage": {
+          "slot_wait": 3.7e-05,
+          "pacing": 3.056247,
+          "walking": 0.467975
+        },
+        "countsByStage": {
+          "slot_wait": 10,
+          "pacing": 10,
+          "walking": 10
+        },
+        "networkAttempts": 10,
+        "successes": 10,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      },
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 0,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 3.535627,
+        "secondsByStage": {
+          "slot_wait": 3.4e-05,
+          "pacing": 3.070544,
+          "walking": 0.464206
+        },
+        "countsByStage": {
+          "slot_wait": 10,
+          "pacing": 10,
+          "walking": 10
+        },
+        "networkAttempts": 10,
+        "successes": 10,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      }
+    ]
+  },
+  "facilities": {
+    "n": null,
+    "qps": 3.0,
+    "rounds": 3,
+    "wallMean": 1.983239,
+    "wallMin": 1.97945,
+    "wallMax": 1.985222,
+    "wallPeakToPeak": 0.005772,
+    "relativeSpread": 0.00291,
+    "retries": [
+      0,
+      0,
+      0
+    ],
+    "failures": [
+      0,
+      0,
+      0
+    ],
+    "networkAttempts": [
+      6,
+      6,
+      6
+    ],
+    "maxInFlight": 1,
+    "dominantStages": [
+      "pacing",
+      "pacing",
+      "pacing"
+    ],
+    "summaries": [
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 0,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 1.985046,
+        "secondsByStage": {
+          "slot_wait": 2.1e-05,
+          "pacing": 1.701868,
+          "poi_search": 0.231493,
+          "walking": 0.047598,
+          "geometry": 0.000714,
+          "report": 2.3e-05
+        },
+        "countsByStage": {
+          "slot_wait": 6,
+          "pacing": 6,
+          "poi_search": 5,
+          "walking": 1,
+          "geometry": 1,
+          "report": 1
+        },
+        "networkAttempts": 6,
+        "successes": 6,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      },
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 0,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 1.985222,
+        "secondsByStage": {
+          "slot_wait": 1.6e-05,
+          "pacing": 1.701645,
+          "poi_search": 0.232944,
+          "walking": 0.047436,
+          "geometry": 0.000452,
+          "report": 3.1e-05
+        },
+        "countsByStage": {
+          "slot_wait": 6,
+          "pacing": 6,
+          "poi_search": 5,
+          "walking": 1,
+          "geometry": 1,
+          "report": 1
+        },
+        "networkAttempts": 6,
+        "successes": 6,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      },
+      {
+        "schemaVersion": "stage-ledger-v1",
+        "realNetworkRequests": 0,
+        "qps": 3.0,
+        "center": {
+          "lng": 121.513926,
+          "lat": 31.313077
+        },
+        "wallSeconds": 1.97945,
+        "secondsByStage": {
+          "slot_wait": 1.8e-05,
+          "pacing": 1.700049,
+          "poi_search": 0.229898,
+          "walking": 0.046436,
+          "geometry": 0.000332,
+          "report": 3.3e-05
+        },
+        "countsByStage": {
+          "slot_wait": 6,
+          "pacing": 6,
+          "poi_search": 5,
+          "walking": 1,
+          "geometry": 1,
+          "report": 1
+        },
+        "networkAttempts": 6,
+        "successes": 6,
+        "retries": 0,
+        "failures": 0,
+        "failureReasons": {},
+        "maxInFlight": 1,
+        "dominantStage": "pacing"
+      }
+    ]
+  },
+  "qualifiedImprovement": {
+    "status": "unset-until-live",
+    "rule": "Any later live optimization must exceed this run's wall peak-to-peak on the same N and input; mock spread is noise only and is not a production threshold.",
+    "source": "mock",
+    "wallPeakToPeakSeconds": 0.01052,
+    "wallMeanSeconds": 3.531355,
+    "relativeSpread": 0.002979
+  }
+}

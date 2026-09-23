@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "matrix-pair-collection-v1",
+  "label": "paired-live",
+  "planHash": "7b1ef88aaff161e134016709eb8b47869e1cd382d0ae5c939a52608575d50c60",
+  "routeMetric": "distance",
+  "qps": 3.0,
+  "matrixWeight": 5,
+  "singles": [],
+  "matrix": {
+    "httpStatus": 200,
+    "status": 0,
+    "error": null,
+    "seconds": 0.104655
+  },
+  "stopReason": null,
+  "ledger": {
+    "schemaVersion": "stage-ledger-v1",
+    "realNetworkRequests": 5,
+    "qps": 3.0,
+    "center": {
+      "lng": 121.513926,
+      "lat": 31.313077
+    },
+    "wallSeconds": 4.762581,
+    "secondsByStage": {
+      "slot_wait": 2.4e-05,
+      "pacing": 3.095787,
+      "walking": 0.425128
+    },
+    "countsByStage": {
+      "slot_wait": 5,
+      "pacing": 10,
+      "walking": 5
+    },
+    "networkAttempts": 5,
+    "successes": 5,
+    "retries": 0,
+    "failures": 0,
+    "failureReasons": {},
+    "maxInFlight": 1,
+    "dominantStage": "pacing"
+  },
+  "singleRequests": 5,
+  "matrixHttpRequests": 1,
+  "realNetworkRequests": 6
+}

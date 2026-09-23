@@ -54,11 +54,11 @@ class PlacesClient:
         self.conflicts = []
         self.stop_reason = None
 
-    async def _attempt(self, origin, query, radius, page, deadline):
+    async def _attempt(self, origin, query, radius, page, deadline, attempt=1):
         status = code = None
         start = time.monotonic()
         payload, reason = None, "interrupted"
-        async with request_slot(self.gate, self.token, deadline) as outcome:
+        async with request_slot(self.gate, self.token, deadline, stage="poi_search", attempt=attempt) as outcome:
             self.requests += 1
             try:
                 response = await self.client.get("https://api.map.baidu.com/place/v3/around", params={
@@ -90,7 +90,7 @@ class PlacesClient:
             return None, self.stop_reason
         for attempt in range(2):
             try:
-                payload, reason = await self._attempt(origin, query, radius, page, deadline)
+                payload, reason = await self._attempt(origin, query, radius, page, deadline, attempt=attempt+1)
             except RequestStopped as exc:
                 payload, reason = None, exc.reason
             if reason in STOP_ERRORS:

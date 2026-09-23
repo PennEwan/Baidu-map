@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "od-observations-v1",
+  "note": "合成示例，仅用于演示 od_cache_review 的输入格式与统计口径；不是真实调用记录，坐标非生产数据。",
+  "observations": [
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "duration", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.517526, 31.313077], "origin_uid": "", "destination_uid": "", "task_id": "task-a", "reason": null, "endpoint_verified": true},
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "duration", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.517526, 31.313077], "origin_uid": "", "destination_uid": "", "task_id": "task-b", "reason": null, "endpoint_verified": true},
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "duration", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.517526, 31.313077], "origin_uid": "", "destination_uid": "", "task_id": "task-b", "reason": null, "endpoint_verified": true},
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "duration", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.517526, 31.313077], "origin_uid": "", "destination_uid": "poi-9", "task_id": "task-a", "reason": null, "endpoint_verified": true},
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "duration", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.510326, 31.313077], "origin_uid": "", "destination_uid": "", "task_id": "task-a", "reason": null, "endpoint_verified": true},
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "duration", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.510326, 31.313077], "origin_uid": "", "destination_uid": "", "task_id": "task-a", "reason": "temporary", "endpoint_verified": true},
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "duration", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.510326, 31.313077], "origin_uid": "", "destination_uid": "", "task_id": "task-a", "reason": null, "endpoint_verified": false},
+    {"provider": "baidu", "api_version": "directionlite/v1/walking", "metric": "distance", "coord_system": "bd09ll", "origin": [121.513926, 31.313077], "destination": [121.517526, 31.313077], "origin_uid": "", "destination_uid": "", "task_id": "task-a", "reason": null, "endpoint_verified": true}
+  ]
+}

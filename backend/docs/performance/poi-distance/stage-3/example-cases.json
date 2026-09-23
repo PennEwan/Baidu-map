@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "matrix-contract-cases-v1",
+  "note": "合成示例，仅用于演示 matrix_contract 的输入格式与检查口径；不是真实成对调用记录。",
+  "tolerances": {
+    "distanceAbsM": 50,
+    "distanceRel": 0.05,
+    "durationAbsS": 30,
+    "durationRel": 0.1
+  },
+  "cases": [
+    {
+      "id": "od-match",
+      "origin": [121.513926, 31.313077],
+      "destination": [121.517526, 31.313077],
+      "single": {"distance": 950, "duration": 700, "endpointVerified": true},
+      "matrix": {"distance": 952, "duration": 705}
+    },
+    {
+      "id": "od-mismatch",
+      "origin": [121.513926, 31.313077],
+      "destination": [121.510326, 31.313077],
+      "single": {"distance": 800, "duration": 600, "endpointVerified": true},
+      "matrix": {"distance": 1050, "duration": 620}
+    },
+    {
+      "id": "od-zero-unknown",
+      "origin": [121.513926, 31.313077],
+      "destination": [121.508126, 31.313077],
+      "single": {"distance": 900, "duration": 650, "endpointVerified": true},
+      "matrix": {"distance": 0, "duration": 0}
+    },
+    {
+      "id": "od-route-divergence",
+      "origin": [121.513926, 31.313077],
+      "destination": [121.506326, 31.313077],
+      "single": {"distance": 950, "duration": 700, "endpointVerified": true},
+      "matrix": {"distance": 1050, "duration": 600}
+    },
+    {
+      "id": "od-uid-bound",
+      "origin": [121.513926, 31.313077],
+      "destination": [121.517526, 31.313077],
+      "destinationUid": "poi-9",
+      "single": {"distance": 990, "duration": 710, "endpointVerified": true},
+      "matrix": {"distance": 995, "duration": 712}
+    }
+  ]
+}

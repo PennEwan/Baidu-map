@@ -11,6 +11,7 @@ life-circle-demo/.env.local
 life-circle-demo/.env.*.local
 
 # Local editor and OS files
+.venv/
 .idea/
 .vscode/
 .DS_Store

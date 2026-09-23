@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "quota-inventory-v1",
+  "akConfigured": false,
+  "analysisProvider": "baidu",
+  "analysisQps": null,
+  "analysisQpsConfigured": false,
+  "analysisQpsIsLocalPacing": true,
+  "mockQpsThreeNotProduction": true,
+  "assumedMatrixFiftyOdPerSecondNotProduction": true,
+  "sharedCredentialSource": "same-backend-env-file",
+  "sameAccountIfSameEnvFile": true,
+  "independentLimiters": [
+    {
+      "name": "AnalysisManager.gate",
+      "qpsField": "ANALYSIS_QPS",
+      "process": "backend-api"
+    },
+    {
+      "name": "PoiRuntime.gate",
+      "qpsField": "CollectionConfig.runtime.qps",
+      "process": "poi_collect-cli"
+    }
+  ],
+  "sharedAccountLimiter": false,
+  "crossProcessLimiter": false,
+  "b1JoinedFacilities": false,
+  "matrixNotInProduction": true,
+  "consoleCheckRequired": true,
+  "officialWalkingDirection": {
+    "path": "/directionlite/v1/walking",
+    "quotaUnit": "route-request"
+  },
+  "officialWalkingMatrix": {
+    "path": "/routematrix/v2/walking",
+    "maxOdProduct": 50,
+    "quotaUnit": "od-route"
+  },
+  "console": {
+    "status": "not-read-from-console",
+    "checkedAt": null,
+    "walkingPermission": null,
+    "walkingPerSecond": null,
+    "walkingDaily": null,
+    "matrixPermission": null,
+    "matrixOdPerSecond": null,
+    "matrixDaily": null
+  },
+  "liveBaseline": {
+    "center": {
+      "lng": 121.513926,
+      "lat": 31.313077
+    },
+    "maxOd": 10,
+    "minRounds": 3,
+    "requiresAcceptQuota": true
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "qps-probe-v1",
+  "label": "qps-probe-live",
+  "provider": "baidu/directionlite/v1/walking",
+  "qpsIsLocalOnly": true,
+  "note": "pacing 上限探测；observedCeilingQps 是最后整档通过的值，不是控制台额度。",
+  "levels": [
+    {
+      "qps": 1.0,
+      "plannedRequests": 1,
+      "sent": 1,
+      "ok": 1,
+      "outcomes": {
+        "None": 1
+      },
+      "durationMeanSeconds": 535.0,
+      "wallSeconds": 0.452022,
+      "passed": true
+    },
+    {
+      "qps": 2.0,
+      "plannedRequests": 2,
+      "sent": 2,
+      "ok": 2,
+      "outcomes": {
+        "None": 2
+      },
+      "durationMeanSeconds": 559.0,
+      "wallSeconds": 0.706867,
+      "passed": true
+    },
+    {
+      "qps": 3.0,
+      "plannedRequests": 3,
+      "sent": 3,
+      "ok": 3,
+      "outcomes": {
+        "None": 3
+      },
+      "durationMeanSeconds": 592.666667,
+      "wallSeconds": 1.126987,
+      "passed": true
+    },
+    {
+      "qps": 5.0,
+      "plannedRequests": 5,
+      "sent": 5,
+      "ok": 5,
+      "outcomes": {
+        "None": 5
+      },
+      "durationMeanSeconds": 535.8,
+      "wallSeconds": 1.330642,
+      "passed": true
+    },
+    {
+      "qps": 8.0,
+      "plannedRequests": 8,
+      "sent": 8,
+      "ok": 8,
+      "outcomes": {
+        "None": 8
+      },
+      "durationMeanSeconds": 608.0,
+      "wallSeconds": 2.049149,
+      "passed": true
+    },
+    {
+      "qps": 12.0,
+      "plannedRequests": 12,
+      "sent": 12,
+      "ok": 12,
+      "outcomes": {
+        "None": 12
+      },
+      "durationMeanSeconds": 603.833333,
+      "wallSeconds": 2.353033,
+      "passed": true
+    },
+    {
+      "qps": 20.0,
+      "plannedRequests": 20,
+      "sent": 20,
+      "ok": 20,
+      "outcomes": {
+        "None": 20
+      },
+      "durationMeanSeconds": 595.65,
+      "wallSeconds": 2.259114,
+      "passed": true
+    }
+  ],
+  "observedCeilingQps": 20.0,
+  "stopReason": null,
+  "realNetworkRequests": 51,
+  "wallSeconds": 11.105625,
+  "finishedUtc": "2026-09-17T11:18:12.562857+00:00"
+}

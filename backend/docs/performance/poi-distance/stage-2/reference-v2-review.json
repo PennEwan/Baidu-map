@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "od-cache-review-v1",
+  "label": "frozen-reference-v2",
+  "networkRequests": 0,
+  "totals": {
+    "observations": 48,
+    "uniqueKeys": 33,
+    "duplicateObservations": 15,
+    "potentialHitRate": 0.3125,
+    "maxMultiplicity": 2,
+    "crossTaskKeys": 0,
+    "crossTaskDuplicateObservations": 0,
+    "crossTaskPotentialHitRate": 0.0
+  },
+  "cacheable": {
+    "observations": 0,
+    "uniqueKeys": 0,
+    "duplicateObservations": 0,
+    "potentialHitRate": null,
+    "maxMultiplicity": 0,
+    "crossTaskKeys": 0,
+    "crossTaskDuplicateObservations": 0,
+    "crossTaskPotentialHitRate": null,
+    "excludedReasons": {
+      "endpoint_unverified": 48
+    }
+  },
+  "uidVariantGroups": {
+    "groups": 0,
+    "samples": []
+  },
+  "byMetric": {
+    "duration": 48
+  }
+}
