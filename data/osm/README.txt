@@ -4,7 +4,7 @@ Package: osm-shanghai-geofabrik-260913-runtime
 Purpose: runtime data for the 15 Minute Life Circle application.
 
 Install
-=======
+========
 
 Extract this archive at the application repository root. The archive keeps
 the required data under data/osm/. The application reads the prepared cache;
