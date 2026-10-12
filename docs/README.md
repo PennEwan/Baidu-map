@@ -29,6 +29,7 @@
 
 - [当前状态](../CURRENT_STATE.md)：当前实现、版本与已知限制。
 - [验收证据](../evidence/)：每次验收的独立证据与 PR 草稿（编号不连续时以目录为准）。
+- [额度治理轮次报告](../report.md)：设施检索预算与缓存那一轮的完整报告（`evidence/00-worktree-inventory.md` 引用它）。
 - [参考 PDF](references/ai_15_nIsJ99EN3y.pdf)：外部资料。
 
 ## 迁移约定
