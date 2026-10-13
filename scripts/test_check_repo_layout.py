@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CHECKER = ROOT / "scripts" / "check_repo_layout.py"
 
 GOOD_FILES: dict[str, bytes] = {
-    ".gitignore": b"intro-page/\n/.venv/\n",
+    ".gitignore": b"intro-page/\n/.venv/\n/life-circle-demo/node_modules\n",
     ".gitattributes": b"*.bat text eol=crlf\n*.command text eol=lf\n",
     "docs/存在.md": "# 存在\n".encode(),
     # 同一个目录里的链接，目标用 URL 编码写：中文路径要能解析。
@@ -37,6 +37,7 @@ GOOD_FILES: dict[str, bytes] = {
     "docs/architecture/HYBRID_ISOCHRONE_DESIGN.md": "# 设计\n".encode(),
     # 代码里的模板链接（按生成文档所在目录写）：正确的那份不该报。
     "backend/tools/好模板.py": 'TEXT = "见 [设计](../../docs/architecture/HYBRID_ISOCHRONE_DESIGN.md)"\n'.encode(),
+    "life-circle-demo/package.json": b'{"name": "life-circle-demo"}\n',
     "start.bat": "@echo off\r\n".encode(),
     "start.command": b"#!/bin/sh\n",
 }
@@ -51,8 +52,19 @@ BAD_FILES: dict[str, bytes] = {
 }
 
 
-def run(repo: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess:
-    return subprocess.run(list(args), cwd=repo, check=check, capture_output=True, text=True)
+def run(repo: Path, *args: str, check: bool = True, input: str | None = None) -> subprocess.CompletedProcess:
+    return subprocess.run(list(args), cwd=repo, check=check, capture_output=True, text=True, input=input)
+
+
+def add_absolute_symlink(repo: Path, name: str, target: str) -> None:
+    """把一条绝对路径符号链接写进索引。
+
+    这里不用 os.symlink：本仓库的检出设了 core.symlinks=false，而且自检要能在不支持
+    符号链接的文件系统上照样跑。`--cacheinfo` 只写索引、与文件系统无关 —— 而索引正是
+    PR #55 那次提交留下问题的地方。
+    """
+    digest = run(repo, "git", "hash-object", "-w", "--stdin", input=target).stdout.strip()
+    run(repo, "git", "update-index", "--add", "--cacheinfo", f"120000,{digest},{name}")
 
 
 def build(repo: Path, files: dict[str, bytes], *, bad: bool, bat_attr: bool = True) -> None:
@@ -138,6 +150,51 @@ def main() -> int:
         build(endings, GOOD_FILES, bad=False, bat_attr=False)
         code, output = check(endings)
         expect(code == 1 and "start.bat" in output, f"索引里的 CRLF 被抓到（实际退出码 {code}）")
+
+        print("用例四：依赖目录被提交时必须失败，只在本机安装时必须通过")
+        deps = base / "deps"
+        deps.mkdir()
+        build(deps, GOOD_FILES, bad=False)
+        modules = deps / "life-circle-demo" / "node_modules"
+        # 真实的本地安装：一棵未跟踪的目录树，检查器不该把它当成仓库内容。
+        (modules / "left-pad").mkdir(parents=True)
+        (modules / "left-pad" / "index.js").write_text("module.exports = 1\n", encoding="utf-8")
+        code, output = check(deps)
+        expect(code == 0, f"未跟踪的依赖目录不误报（实际 {code}）")
+        if code != 0:
+            print(output)
+
+        # (a) 普通文件：`dir/` 形式的忽略规则挡不住它 —— 这正是 PR #55 的情形。
+        shutil.rmtree(modules)
+        modules.write_text("/home/someone/else/node_modules", encoding="utf-8")
+        run(deps, "git", "add", "-f", "life-circle-demo/node_modules")
+        run(deps, "git", "commit", "-q", "-m", "commit the installed dependencies")
+        code, output = check(deps)
+        expect(code == 1 and "依赖目录不该入库" in output,
+               f"被提交的依赖被抓到（实际退出码 {code}）")
+
+        # (b) 索引里的绝对路径符号链接：目标只在提交者机器上存在。
+        run(deps, "git", "rm", "--cached", "-q", "life-circle-demo/node_modules")
+        modules.unlink()
+        add_absolute_symlink(deps, "life-circle-demo/node_modules", "/home/someone/else/node_modules")
+        code, output = check(deps)
+        expect(code == 1 and "绝对路径符号链接" in output,
+               f"绝对路径符号链接被抓到（实际退出码 {code}）")
+
+        print("用例五：忽略规则退回 `dir/` 形式时必须失败（#55 的原始情形）")
+        trailing = base / "trailing"
+        trailing.mkdir()
+        # 实测过 git 的语义：`dir/` 只匹配**目录** —— 普通文件、符号链接、以及不存在的
+        # 路径都匹配不到；不带尾斜杠的裸路径四种都匹配。所以这里放一个普通文件，
+        # 规则一旦写回 `node_modules/`，这个未跟踪的依赖就不再被忽略。
+        broken = dict(GOOD_FILES)
+        broken[".gitignore"] = b"intro-page/\n/.venv/\n/life-circle-demo/node_modules/\n"
+        build(trailing, broken, bad=False)
+        (trailing / "life-circle-demo" / "node_modules").write_text(
+            "/home/someone/else/node_modules", encoding="utf-8")
+        code, output = check(trailing)
+        expect(code == 1 and "不再被 .gitignore 忽略" in output,
+               f"退回 `dir/` 规则时被抓到（实际退出码 {code}）")
 
     print()
     if failures:

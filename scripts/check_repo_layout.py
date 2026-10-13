@@ -7,7 +7,7 @@
 python3 scripts/check_repo_layout.py
 ```
 
-这个仓库真实发生过三类问题，本脚本把它们变成机械检查：
+这个仓库真实发生过四类问题，本脚本把它们变成机械检查：
 
 1. **文档搬了、引用没跟着改**：Phase 1 把根目录六份文档搬进 `docs/`，其中一处链接
    还写在 `backend/tools/report_hybrid_validation.py` 的字符串模板里。
@@ -16,6 +16,10 @@ python3 scripts/check_repo_layout.py
 3. **行尾被工具改掉**：`*.bat` 必须 CRLF、`*.command`/`*.sh` 必须 LF（见
    `.gitattributes` 与提交 `7cc2265`）。批量替换文档时最容易顺手把整份文件的
    换行改掉，把一行修改放大成上千行差异。
+4. **依赖目录被提交**：`node_modules` 必须按 lockfile 还原，不该进仓库。PR #55 提交了
+   一个指向 `/home/…/life-circle-demo/node_modules` 的符号链接；本仓库的检出设了
+   `core.symlinks=false`，于是它落成一个内容为路径的普通文件 —— **在本机完全看不出来**，
+   而正常克隆会得到一个指向别人机器的死链接。
 
 文档链接怎么算通过
 ------------------
@@ -60,6 +64,11 @@ SCANNED_SUFFIXES = (".md", ".py", ".ts", ".tsx", ".yml", ".yaml", ".json", ".txt
 
 #: `.gitattributes` 的行尾约定；值指**工作区**应有的行尾。
 LINE_ENDINGS = {"start.bat": "crlf", "start.command": "lf"}
+
+#: 这些路径只在本机安装时出现，绝不能进索引 —— 克隆者要按 lockfile 自己装。
+#: 规则必须是**不带尾斜杠**的裸路径：`dir/` 只匹配目录，匹配不到符号链接或普通文件，
+#: PR #55 就是这样把一个指向绝对路径的 `node_modules` 链接提交了进来。
+NEVER_TRACKED = ("life-circle-demo/node_modules",)
 
 LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(<[^>\n]*>|[^\s)]+)(?:\s+"[^"\n]*")?\s*\)')
 REFERENCE = re.compile(r"^ {0,3}\[[^\]\n]+\]:\s*(\S+)", re.MULTILINE)
@@ -187,15 +196,41 @@ def main() -> int:
         if name in tracked_set:
             problems.append(f"{name}: 又出现在仓库根目录（Phase 1 已把它搬进 docs/）")
 
-    for line in git("ls-files", "-s").decode("utf-8").splitlines():
-        if line.startswith("160000"):
-            problems.append(f"gitlink: {line.split(chr(9), 1)[-1]} —— 克隆者拿不到它的内容")
+    # 索引里这三类条目会让克隆者拿到坏东西：gitlink 没有内容、绝对路径链接只在
+    # 本机有效、依赖目录必须由 lockfile 还原。`-z` 按字节读路径，中文名不会被
+    # core.quotepath 转义（见模块开头那条教训）。
+    for record in git("ls-files", "-s", "-z").decode("utf-8").split("\0"):
+        if not record:
+            continue
+        meta, name = record.split(chr(9), 1)
+        mode, sha = meta.split()[:2]
+        if mode == "160000":
+            problems.append(f"gitlink: {name} —— 克隆者拿不到它的内容")
+        elif mode == "120000":
+            # 链接目标要读**索引里的 blob**：`core.symlinks=false` 的检出会把它落成
+            # 一个内容为路径的普通文件，读工作区就看不出这是个链接。
+            target = git("cat-file", "blob", sha).decode("utf-8", "replace").strip()
+            if target.startswith("/"):
+                problems.append(f"绝对路径符号链接: {name} -> {target} —— 这条路径只在"
+                                f"提交者的机器上存在，克隆与 CI 都会拿到一个坏链接")
+        if name in NEVER_TRACKED or any(name.startswith(path + "/") for path in NEVER_TRACKED):
+            problems.append(f"{name}: 依赖目录不该入库 —— 克隆后由 npm ci 按 lockfile 安装")
 
     # 用不存在的探针路径检查忽略规则：干净检出里 intro-page/ 并不存在。
     for directory, why in (("intro-page", "两个独立站点"), (".venv", "根目录虚拟环境")):
         probe = f"{directory}/__layout_probe__"
         if subprocess.run(["git", "check-ignore", "--no-index", "-q", probe], cwd=ROOT).returncode != 0:
             problems.append(f"{directory}/ 不再被 .gitignore 忽略：{why}会被提交成 gitlink")
+
+    # 依赖目录同理，而且这里**不能**用 `path/probe` 的形式探：那条规则必须能匹配
+    # 路径本身，才能同时挡住目录、符号链接和普通文件。实测 git 的语义：`dir/` 只匹配
+    # 目录，文件和符号链接都漏（#55 提交进去的那条就是符号链接）；裸路径四种都匹配，
+    # 包括**不存在的路径** —— CI 的干净检出正是这种情况，所以这条探针在那里最有效。
+    # 本机若已装好依赖，`life-circle-demo/.gitignore` 里自带的 `node_modules/` 会先决定
+    # "目录"这一种情形，探针退化为"规则还在"的存在性检查；真正兜底的是上面那条索引检查。
+    for path in NEVER_TRACKED:
+        if subprocess.run(["git", "check-ignore", "--no-index", "-q", path], cwd=ROOT).returncode != 0:
+            problems.append(f"{path} 不再被 .gitignore 忽略：依赖会被提交进仓库")
 
     for name, want in LINE_ENDINGS.items():
         if name not in tracked_set:
