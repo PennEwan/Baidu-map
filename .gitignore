@@ -1,5 +1,8 @@
 # Frontend dependencies and generated outputs
-life-circle-demo/node_modules/
+# No trailing slash on purpose: `dir/` matches directories only, so a symlink or a plain
+# file at this path slipped through and PR #55 committed one (`node_modules` as a link to
+# an absolute local path). The bare path matches file, directory and symlink alike.
+/life-circle-demo/node_modules
 life-circle-demo/dist/
 life-circle-demo/output/
 life-circle-demo/test-results/
