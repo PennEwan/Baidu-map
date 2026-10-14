@@ -1,0 +1,34 @@
+/*
+ * 极窄窗口提示的样式。
+ *
+ * 提示必须铺满可视窗口且不透明：底下的页面在 showModal() 之后已经是 inert，
+ * 视觉上也就不该再露出一点边角，否则用户会以为那部分还能点。
+ */
+.guard {
+  position: fixed; inset: 0;
+  /* 顶层的保险：真正铺在最上面的是对话框自己的 top layer，z-index 只是万一时兜底。 */
+  z-index: 2147483647;
+  /* UA 给 dialog 的是 fit-content + max-width/-height，这里逐个还原成铺满。 */
+  width: auto; height: auto; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0;
+  background: linear-gradient(180deg, #f7f9fc 0%, #ecf1f9 100%);
+  color: #1f2329;
+  /* 提示自己就是最后一道：滚不到底下的页面上去。 */
+  overscroll-behavior: contain;
+}
+
+/*
+ * 只有打开时才接管布局。`display` 一旦写进基类，作者样式会盖掉 UA 的
+ * `dialog:not([open]) { display: none }`，关掉的提示会一直挂在页面上。
+ */
+.guard[open] { display: flex; align-items: center; justify-content: center; }
+
+.body { width: min(560px, calc(100% - 40px)); text-align: center; }
+.icon { display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; margin-bottom: 18px; border-radius: 18px;
+  font-size: 26px; color: #fff;
+  background: linear-gradient(90deg, #3a65ff 0%, #7b5cff 100%);
+  box-shadow: 0 8px 24px rgba(58, 101, 255, .28); }
+.guard h2 { font-size: 24px; font-weight: 600; letter-spacing: .02em; }
+.body p { margin-top: 10px; color: #666; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.body .hint { margin-top: 14px; color: #999; font-size: 12px; }

@@ -1047,3 +1047,175 @@ test('明细到期后只剩结论与汇总，一个设施都不显示', async ({
   await expect(page.getByTestId('checkup-retry-run')).toHaveCount(0);
   expect(errors).toEqual([]);
 });
+
+/**
+ * 极窄窗口守卫。
+ *
+ * 拦的不是某一个页面，而是"这个窗口装不下版式"：宽度窄于普通手机竖屏 9:20 的
+ * 宽高比的 2/3 —— 也就是 0.30 —— 就整屏挡住。下面盯四件事：提示真的铺满并盖住
+ * 底下、Esc/Tab/点击/滚动都到不了被挡的页面、阈值正好落在 0.30、窗口宽回来后
+ * 页面连同原状态一起回来（不刷新、不重挂）。判定本身另有一份单元测试。
+ */
+test('窄于普通手机宽高比 2/3 的窗口被整屏提示挡住', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await setup(page);
+  await page.setViewportSize({ width: 255, height: 1112 });
+  await page.goto('/');
+
+  const guard = page.getByTestId('viewport-guard');
+  await expect(guard).toBeVisible();
+  await expect(guard).toHaveAttribute('open', '');
+  await expect(guard.getByRole('heading', { name: '窗口过小' })).toBeVisible();
+
+  // 铺满可视窗口：不留边，也不比窗口大 —— 底下那层没有露出来的角落。
+  const viewport = await page.evaluate(() => ({ width: innerWidth, height: innerHeight }));
+  const box = (await guard.boundingBox())!;
+  expect(Math.abs(box.x)).toBeLessThan(1);
+  expect(Math.abs(box.y)).toBeLessThan(1);
+  expect(Math.abs(box.width - viewport.width)).toBeLessThan(1);
+  expect(Math.abs(box.height - viewport.height)).toBeLessThan(1);
+
+  // 不透明：底下的页面一点都透不出来。
+  expect(await guard.evaluate(element => {
+    const { backgroundImage, backgroundColor } = getComputedStyle(element);
+    return backgroundImage !== 'none' || (backgroundColor !== 'rgba(0, 0, 0, 0)' && backgroundColor !== 'transparent');
+  })).toBe(true);
+
+  // 视口正中命中的是提示本身，不是地图或面板。
+  expect(await page.evaluate(() =>
+    document.elementFromPoint(innerWidth / 2, innerHeight / 2)?.closest('dialog[open]') !== null)).toBe(true);
+
+  // 留下 255×1112 这一档的样子：这个尺寸正是原先版式出问题的地方。
+  await page.screenshot({ path: 'output/checkup-ui/viewport-guard-255x1112.png' });
+
+  // 提示不能把页面自己弄崩：255×1112 正是原先出问题的尺寸。
+  expect(errors).toEqual([]);
+});
+
+test('提示期间的 Esc、Tab、点击与滚动都到不了被挡的页面', async ({ page }) => {
+  await setup(page);
+  await page.setViewportSize({ width: 255, height: 1112 });
+  await page.goto('/');
+  const guard = page.getByTestId('viewport-guard');
+  await expect(guard).toBeVisible();
+
+  // Esc 关不掉 —— 而且不能只按一次就算数：浏览器给页面的关闭请求是有额度的，连按几下之后
+  // cancel 事件就不再可取消，preventDefault 随之失效（实测第二次按下提示就没了，且自己回不来）。
+  // 所以这里按满 8 次，每次都还得在。
+  for (let press = 1; press <= 8; press++) {
+    await page.keyboard.press('Escape');
+    await expect(guard, `第 ${press} 次 Esc 之后`).toBeVisible();
+    await expect(guard, `第 ${press} 次 Esc 之后`).toHaveAttribute('open', '');
+  }
+
+  // 兜底：万一提示还是被别的路径关掉（外部脚本 close()、浏览器强关），只要窗口仍旧过窄就得自己回来，
+  // 不能留下一个"关掉提示就能用"的口子。
+  await page.evaluate(() => document.querySelector('dialog')?.close());
+  await expect(guard).toBeVisible();
+
+  // 焦点始终关在提示里（或浏览器自己手里），进不了被挡的页面。
+  const focusIsOut = () => page.evaluate(() => {
+    const active = document.activeElement;
+    const open = document.querySelector('dialog[open]');
+    if (active === null || active === document.body) return true;
+    return open !== null && (active === open || open.contains(active));
+  });
+  expect(await focusIsOut()).toBe(true);
+  for (let press = 1; press <= 4; press++) {
+    await page.keyboard.press('Tab');
+    expect(await focusIsOut(), `第 ${press} 次 Tab 之后`).toBe(true);
+  }
+
+  // 点在正中：这一下必须落在提示上。光看"没有报告"证明不了什么 —— 报告本来就没生成过，
+  // 所以直接数页面根节点收到了几次点击与滚轮，并把点击的落点记下来。
+  const wired = await page.evaluate(() => {
+    const root = document.querySelector('.wb');
+    // 页面结构变了就当场断：否则下面的计数会因为没挂上监听器而假通过。
+    if (root === null) return false;
+    const hits = { clicks: 0, wheels: 0, targets: [] as boolean[] };
+    (window as unknown as { __hits: typeof hits }).__hits = hits;
+    root.addEventListener('click', () => { hits.clicks++; }, true);
+    root.addEventListener('wheel', () => { hits.wheels++; }, true);
+    // 记在捕获阶段，且挂在 document 上：提示里的点击也看得到。
+    document.addEventListener('click', event => {
+      hits.targets.push((event.target as Element | null)?.closest('dialog[open]') !== null);
+    }, true);
+    return true;
+  });
+  expect(wired, '页面根节点 .wb 不存在，下面的计数会假通过').toBe(true);
+
+  const scrolled = () => page.evaluate(() => ({ window: window.scrollY,
+    inner: Array.from(document.querySelectorAll('*')).filter(node => node.scrollTop > 0).length }));
+  const before = await scrolled();
+
+  await page.mouse.click(127, 500);
+  await page.mouse.wheel(0, 600);
+  const hits = await page.evaluate(() => (window as unknown as { __hits: {
+    clicks: number; wheels: number; targets: boolean[] } }).__hits);
+  expect(hits.targets).toEqual([true]);
+  expect(hits.clicks).toBe(0);
+  expect(hits.wheels).toBe(0);
+  // 滚动锁住：滚轮下去，底下的容器一个都不动。
+  expect(await scrolled()).toEqual(before);
+  expect(await page.evaluate(() => document.body.style.overflow)).toBe('hidden');
+});
+
+test('阈值正好落在宽高比 0.30：299 拦、300 放行', async ({ page }) => {
+  await setup(page);
+  await page.setViewportSize({ width: 300, height: 1000 });
+  await page.goto('/');
+  const guard = page.getByTestId('viewport-guard');
+  await expect(guard).not.toBeVisible();
+
+  // 只收窄一个像素就越过阈值：判定看的是比例，不是某个宽度。
+  await page.setViewportSize({ width: 299, height: 1000 });
+  await expect(guard).toBeVisible();
+
+  await page.setViewportSize({ width: 300, height: 1000 });
+  await expect(guard).not.toBeVisible();
+
+  // 高度同样参与判断：宽度不动，把高度拉长也会越过阈值。
+  await page.setViewportSize({ width: 300, height: 1001 });
+  await expect(guard).toBeVisible();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(guard).not.toBeVisible();
+});
+
+test('窗口恢复后提示自动收走，页面连同原状态一起回来', async ({ page }) => {
+  await setup(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await pickAndStart(page);
+  await page.getByRole('button', { name: '查看体检报告' }).click();
+  const report = page.getByTestId('checkup-report');
+  await expect(report).toBeVisible();
+
+  // 给页面根节点做个记号：恢复之后还是同一个节点，就说明没刷新、也没重挂。
+  const marked = await page.evaluate(() => {
+    const root = document.querySelector('.wb');
+    if (root === null) return false;
+    (window as unknown as { __kept?: Element | null }).__kept = root;
+    return true;
+  });
+  expect(marked, '页面根节点 .wb 不存在，下面的"同一个节点"断言会假通过').toBe(true);
+
+  await page.setViewportSize({ width: 255, height: 1112 });
+  const guard = page.getByTestId('viewport-guard');
+  await expect(guard).toBeVisible();
+
+  // 提示盖着的时候按 Esc：antd 的抽屉把 Esc 挂在 window 上，inert 只挡指针与焦点、
+  // 挡不住冒泡。不专门吃掉这一键，抽屉会在提示背后被关掉 —— 恢复以后就少了一个面板。
+  for (let press = 1; press <= 3; press++) await page.keyboard.press('Escape');
+  await expect(guard).toBeVisible();
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(guard).not.toBeVisible();
+  expect(await page.evaluate(() =>
+    (window as unknown as { __kept?: Element | null }).__kept === document.querySelector('.wb'))).toBe(true);
+  // 报告抽屉还开着，结论也还在：挡的是访问，不是把页面卸载掉。
+  await expect(report).toBeVisible();
+  await expect(page.getByTestId('report-summary')).toBeVisible();
+  // 滚动锁要还回去，不能留下一个滚不动的页面。
+  expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
+});

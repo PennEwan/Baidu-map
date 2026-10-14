@@ -5,6 +5,7 @@ import zhCN from 'antd/locale/zh_CN';
 import { Store } from './Store';
 import App from './App';
 import AlgorithmApp from './AlgorithmApp';
+import ViewportGuard from './components/ViewportGuard';
 import './global.css';
 // 除了离线演示，所有模式都进入体检 v2 工作台，可切换 E8.2 与 OSM＋百度算法。
 const mode = import.meta.env.VITE_ANALYSIS_MODE;
@@ -43,4 +44,6 @@ const workbenchTheme = {
   },
 };
 const theme = mode === 'demo' ? demoTheme : workbenchTheme;
-ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><ConfigProvider locale={zhCN} theme={theme} button={{ autoInsertSpace: false }}>{page}</ConfigProvider></React.StrictMode>);
+// 极窄窗口守卫接在两种模式之外：离线演示与体检工作台共用同一条判断，
+// 也保证提示能盖住 antd 的抽屉与弹层（它们挂在 body 上，同样会被 inert）。
+ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><ConfigProvider locale={zhCN} theme={theme} button={{ autoInsertSpace: false }}><ViewportGuard>{page}</ViewportGuard></ConfigProvider></React.StrictMode>);

@@ -212,3 +212,26 @@ test('any in-map point produces an analysis result', async ({ page }) => {
   await page.screenshot({ path: resolve(screenshots, 'custom-point.png'), fullPage: true, animations: 'disabled' });
 });
 
+/**
+ * 极窄窗口守卫在离线演示这条入口上同样生效。演示页自己那条"窗口过窄"的横幅
+ * （360px 以内显示）拦不住 255×1112 —— 它只是句提示，底下的地图照点不误；
+ * 真正挡住访问的是这一层整屏提示。两条入口共用同一份判定，所以这里只验接线。
+ */
+test('narrower than a phone keeps the demo behind a full-screen notice until it widens', async ({ page }) => {
+  const guard = page.getByTestId('viewport-guard');
+  await expect(guard).not.toBeVisible();
+
+  await page.setViewportSize({ width: 255, height: 1112 });
+  await expect(guard).toBeVisible();
+  await expect(guard).toContainText('窗口过小');
+  // 演示页自己的横幅也出现了，但它挡不住点击：能挡住的是上面那一层。
+  await expect(page.getByText('窗口过窄，交互空间有限，请加宽窗口或横屏使用。')).toBeVisible();
+  expect(await page.evaluate(() =>
+    document.elementFromPoint(innerWidth / 2, innerHeight / 2)?.closest('dialog[open]') !== null)).toBe(true);
+
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await expect(guard).not.toBeVisible();
+  await page.getByRole('button', { name: '开始体检', exact: true }).click();
+  await expectAnalysisLoadingPasses(page);
+});
+
